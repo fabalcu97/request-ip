@@ -12,7 +12,7 @@ function getClientIpFromXForwardedFor(value) {
     }
 
     if (is.not.string(value)) {
-        throw new TypeError(`Expected a string, got "${typeof value}"`);
+        throw new TypeError('Expected a string, got' + typeof value);
     }
 
     // x-forwarded-for may return multiple IP addresses in the format:
@@ -21,7 +21,7 @@ function getClientIpFromXForwardedFor(value) {
     // and the left-most IP address is the IP address of the originating client.
     // source: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/x-forwarded-headers.html
     // Azure Web App's also adds a port for some reason, so we'll only use the first part (the IP)
-    const forwardedIps = value.split(',').map((e) => {
+    const forwardedIps = value.split(',').map(function (e) {
         const ip = e.trim();
         if (ip.includes(':')) {
             const splitted = ip.split(':');
@@ -134,7 +134,7 @@ function mw(options) {
     }
 
     const attributeName = configuration.attributeName || 'clientIp';
-    return (req, res, next) => {
+    return function (req, res, next) {
         req[attributeName] = getClientIp(req); // eslint-disable-line no-param-reassign
         next();
     };
