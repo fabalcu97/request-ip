@@ -141,7 +141,5 @@ function mw(options) {
 }
 
 module.exports = {
-    getClientIpFromXForwardedFor,
-    getClientIp,
-    mw,
+    mw
 };
