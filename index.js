@@ -140,6 +140,4 @@ function mw(options) {
     };
 }
 
-module.exports = {
-    mw
-};
+module.exports = mw
